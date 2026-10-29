@@ -1,0 +1,14 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+body{@apply bg-ivory text-char font-sans antialiased}
+:focus-visible{outline:2px solid #9B8057;outline-offset:3px}
+.rise{animation:rise 1.4s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.field{@apply w-full bg-transparent border-b border-lime py-2 outline-none focus:border-bronze}
+.page{animation:pagein .6s cubic-bezier(.2,.7,.2,1) both}@keyframes pagein{from{opacity:0}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
+.zoomable,a>svg{transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}a:hover .zoomable{transform:scale(1.04)}a:has(.zoomable),a:has(svg[role=img]){overflow:hidden}
+.swap{animation:swap .7s cubic-bezier(.2,.7,.2,1) both}@keyframes swap{from{opacity:0;transform:scale(1.02)}}.viewer{animation:pagein .35s both}
+.hero-img{animation:herozoom 2.4s cubic-bezier(.2,.7,.2,1) both}@keyframes herozoom{from{transform:scale(1.08);opacity:.6}}
+a,button{transition:opacity .3s,color .3s,background-color .3s,border-color .3s}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}

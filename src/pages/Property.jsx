@@ -1,0 +1,12 @@
+import {useParams,Link} from 'react-router-dom';import Gallery from '../components/Gallery.jsx';import InquiryForm from '../components/InquiryForm.jsx';import PropertyCard from '../components/PropertyCard.jsx';import Seo from '../components/Seo.jsx';import {bySlug,properties,pkr} from '../data/properties.js';import {CONTACT} from '../config.js';
+export default function Property(){const {slug}=useParams(),p=bySlug(slug);if(!p)return <p className="pt-40 text-center">That property was not found. <Link className="underline" to="/residences">Back to residences</Link></p>;
+ const rel=properties.filter(x=>x.slug!==slug).sort((a,b)=>(b.area===p.area)-(a.area===p.area)).slice(0,2);
+ const spec=[['Asking price',pkr(p.price)],['Type',p.type],['Bedrooms',p.beds||'n/a'],['Bathrooms',p.baths||'n/a'],['Covered area',p.covered],['Plot area',p.plot],['Status',p.status]];
+ return <article className="mx-auto max-w-[1400px] px-6 md:px-10 pt-28"><Seo title={p.title} desc={p.blurb}/><Gallery p={p}/>
+ <div className="mt-10 grid md:grid-cols-12 gap-12"><div className="md:col-span-7"><p className="text-sm">{p.area}, {p.city}</p><h1 className="font-serif text-5xl md:text-7xl text-walnut">{p.title}</h1><p className="font-serif text-4xl text-bronze mt-3">{pkr(p.price)}</p>
+ <p className="mt-8 text-lg max-w-xl">{p.blurb} Sample content: the full description, floor plan and brochure appear here once supplied.</p>
+ <h2 className="font-serif text-3xl text-walnut mt-12">Features</h2><ul className="mt-3 list-disc pl-5 space-y-1">{p.features.map(f=><li key={f}>{f}</li>)}</ul>
+ <h2 className="font-serif text-3xl text-walnut mt-12">Location</h2><p className="mt-3">{p.area}, {p.city}. A map is added once exact coordinates are verified.</p></div>
+ <aside className="md:col-span-5"><dl className="border-y border-lime divide-y divide-lime">{spec.map(([k,v])=><div key={k} className="flex justify-between py-3"><dt>{k}</dt><dd className="text-walnut text-right">{v}</dd></div>)}</dl>
+ <h2 className="font-serif text-3xl text-walnut mt-12 mb-6">Arrange a viewing</h2><InquiryForm slug={p.slug}/>{CONTACT.whatsapp&&<a className="block mt-6 underline" href={`https://wa.me/${CONTACT.whatsapp}`}>Message on WhatsApp</a>}</aside></div>
+ <h2 className="font-serif text-4xl text-walnut mt-24 mb-8">Related residences</h2><div className="grid md:grid-cols-2 gap-10">{rel.map(r=><PropertyCard key={r.slug} p={r}/>)}</div></article>}

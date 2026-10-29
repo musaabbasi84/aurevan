@@ -1,0 +1,6 @@
+import {Link} from 'react-router-dom';import {Wordmark} from './Nav.jsx';
+export default function Footer(){return <footer className="bg-walnut text-lime mt-32"><div className="mx-auto max-w-[1400px] px-6 md:px-10 py-20 grid md:grid-cols-12 gap-12">
+ <div className="md:col-span-6"><Wordmark light/><p className="font-serif text-3xl text-ivory mt-8 max-w-md leading-snug">Not simply a property. A place with a point of view.</p></div>
+ <div className="md:col-span-3 space-y-3 text-sm"><Link className="block" to="/residences">Residences</Link><Link className="block" to="/locations">Locations</Link><Link className="block" to="/architecture">Architecture</Link><Link className="block" to="/perspective">Our Perspective</Link></div>
+ <div className="md:col-span-3 space-y-3 text-sm"><Link className="block" to="/viewing">Arrange a viewing</Link><Link className="block" to="/privacy">Privacy policy</Link><Link className="block" to="/terms">Terms</Link><p className="text-lime/60 pt-4">Contact details and social links are set in <code>src/config.js</code> once supplied.</p></div></div>
+ <p className="mx-auto max-w-[1400px] px-6 md:px-10 pb-10 text-xs text-lime/60">© {new Date().getFullYear()} AUREVAN. Listings shown are sample data.</p></footer>}
